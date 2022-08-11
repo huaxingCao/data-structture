@@ -28,11 +28,11 @@ public class SeqList<E> {
      */
     public SeqList() {
         this.elementArray = new Object[this.maxLength];
+        this.length = 0;
     }
 
     /**
      * 初始化顺序表
-     * @param elements
      */
     public SeqList(E[] elements) {
         if (elements.length > maxLength)
@@ -42,20 +42,16 @@ public class SeqList<E> {
         this.length = elements.length;
     }
 
+    /**
+     * 是否是空表
+     */
     public boolean isEmpty() {
         return this.length == 0;
     }
 
-    public void test() {
-        System.out.println("max length: " + this.maxLength);
-        System.out.println("length: " + this.length);
-        System.out.print("all element: ");
-        for (int i=0; i<this.elementArray.length;i++) {
-            System.out.print(elementArray[i]);
-            System.out.print(" ");
-        }
-    }
-
+    /**
+     * 扩展元素列表
+     */
     private void expend(int expendLength) {
         this.maxLength = this.maxLength + expendLength;
         this.elementArray = Arrays.copyOf(this.elementArray, this.maxLength);
@@ -63,7 +59,6 @@ public class SeqList<E> {
 
     /**
      * 添加元素
-     * @param element
      */
     public void add(E element) {
         if (this.length == this.maxLength)
@@ -73,37 +68,80 @@ public class SeqList<E> {
     }
 
     /**
-     * 
-     * @param index
-     * @param element
-     * @return
+     * 插入元素，index是插入的位置。时间复杂度 O(n)
      */
     public boolean insert(int index, E element) {
         boolean res = false;
-        if (index <= this.length && index >= -1) {
+        if (index <= this.length && index >= 0) {
             if (this.length == this.maxLength)
                 this.expend(this.diff);
-
+            for (int i = this.length - 1; i >= index; i--) {
+                this.elementArray[i + 1] = this.elementArray[i];
+            }
+            this.elementArray[index] = element;
+            this.length += 1;
+            res = true;
         }
         return res;
     }
 
-//    public E find(int i) {
-//
-//    }
-//
-//    public int search(E element) {
-//
-//    }
-//
-//    public boolean delete(int index) {
-//
-//    }
+    /**
+     * 查找下标为i的元素，无时返回null
+     */
+    public E find(int i) {
+        E res = null;
+        if (i >= 0 && i < this.length)
+            res = (E) this.elementArray[i];
+        return res;
+    }
+
+    /**
+     * 搜索元素，如果存在返回下标，不存在返回-1。时间复杂度 O(n)
+     */
+    public int search(E element) {
+        int res = -1;
+        for (int i = 0; i < this.length; i++) {
+            E ele = (E) this.elementArray[i];
+            if (ele.equals(element)) {
+                res = i;
+                break;
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 删除下标i的元素。时间复杂度 O(n)
+     */
+    public boolean delete(int index) {
+        boolean res = false;
+        if (index >= 0 && index < this.length) {
+            for (int i = index; i <= this.length - 2; i++) {
+                this.elementArray[i] = this.elementArray[i + 1];
+            }
+            this.length -= 1;
+            res = true;
+        }
+
+        return res;
+    }
+
+    public void test() {
+        System.out.println("max length: " + this.maxLength);
+        System.out.println("length: " + this.length);
+        System.out.print("all element: ");
+        for (int i = 0; i < this.elementArray.length; i++) {
+            System.out.print(elementArray[i]);
+            System.out.print(" ");
+        }
+        System.out.println("\n");
+    }
 
     public static void main(String[] args) {
-        Integer[] arr = {1,2,3,4,5,6,7,8,9,10};
+        Integer[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         SeqList<Integer> list = new SeqList<>(arr);
-        list.add(1);
-        list.test();
+
+
+        System.out.println(list.search(4));
     }
 }
