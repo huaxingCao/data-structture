@@ -1,4 +1,4 @@
-package com.chx.linearstructure;
+package com.chx.datastructure.linearstructure;
 
 import java.util.Arrays;
 
