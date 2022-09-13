@@ -1,7 +1,23 @@
 package com.chx.datastructure.linearstructure;
 
 public class Node<E> {
-    public E element = null;
+    private E element = null;
 
-    public Node<E> next = null;
+    private Node<E> next = null;
+
+    public void setElement(E element) {
+        this.element = element;
+    }
+
+    public E getElement() {
+        return element;
+    }
+
+    public void setNext(Node<E> next) {
+        this.next = next;
+    }
+
+    public Node<E> getNext() {
+        return next;
+    }
 }
