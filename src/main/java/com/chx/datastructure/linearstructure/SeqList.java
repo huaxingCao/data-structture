@@ -88,7 +88,7 @@ public class SeqList<E> {
     /**
      * 查找下标为i的元素，无时返回null
      */
-    public E find(int i) {
+    public E get(int i) {
         E res = null;
         if (i >= 0 && i < this.length)
             res = (E) this.elementArray[i];
