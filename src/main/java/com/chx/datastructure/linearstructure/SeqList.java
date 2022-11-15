@@ -2,6 +2,10 @@ package com.chx.datastructure.linearstructure;
 
 import java.util.Arrays;
 
+/**
+ * 线性表实现
+ * @param <E> 元素类型
+ */
 public class SeqList<E> {
     /**
      * 当前最大长度
@@ -124,24 +128,5 @@ public class SeqList<E> {
         }
 
         return res;
-    }
-
-    public void test() {
-        System.out.println("max length: " + this.maxLength);
-        System.out.println("length: " + this.length);
-        System.out.print("all element: ");
-        for (int i = 0; i < this.elementArray.length; i++) {
-            System.out.print(elementArray[i]);
-            System.out.print(" ");
-        }
-        System.out.println("\n");
-    }
-
-    public static void main(String[] args) {
-        Integer[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        SeqList<Integer> list = new SeqList<>(arr);
-
-
-        System.out.println(list.search(4));
     }
 }

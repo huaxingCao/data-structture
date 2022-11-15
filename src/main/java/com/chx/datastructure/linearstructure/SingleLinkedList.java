@@ -1,5 +1,9 @@
 package com.chx.datastructure.linearstructure;
 
+/**
+ * 单链表实现
+ * @param <E>
+ */
 public class SingleLinkedList<E> {
     private Node<E> elements = null;
 
@@ -136,35 +140,25 @@ public class SingleLinkedList<E> {
         return res;
     }
 
-    public void test() {
-        System.out.println(this.length);
-
-        if (this.elements != null) {
-            Node<E> elements = this.elements;
-            System.out.print(elements.getElement());
-            while (elements.getNext() != null) {
-                elements = elements.getNext();
-                System.out.print(" ");
-                System.out.print(elements.getElement());
+    /**
+     * 逆转链表
+     * @param length 要逆转的长度
+     */
+    public void reverse(int length) {
+        if (this.length >= 2 && length >= 2) {
+            Node<E> newFront = this.elements;
+            Node<E> oldFront;
+            Node<E> tmp = this.elements.getNext();
+            int i = 1;
+            while (i < length && i < this.length) {
+                oldFront = tmp;
+                tmp = tmp.getNext();
+                oldFront.setNext(newFront);
+                newFront = oldFront;
+                i++;
             }
+            this.elements.setNext(tmp);
+            this.elements = newFront;
         }
-
-        System.out.println("");
-    }
-
-    public static void main(String[] args) {
-        SingleLinkedList<String> list = new SingleLinkedList<>();
-
-        list.add("a");
-        list.add("b");
-        list.test();
-
-        list.insert(2, "c");
-        list.test();
-
-        list.update(1, "d");
-        list.test();
-
-
     }
 }

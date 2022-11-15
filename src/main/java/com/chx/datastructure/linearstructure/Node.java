@@ -1,5 +1,9 @@
 package com.chx.datastructure.linearstructure;
 
+/**
+ * 链表的结点
+ * @param <E> 结点中存储的数据类型
+ */
 public class Node<E> {
     private E element = null;
 
