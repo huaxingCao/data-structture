@@ -1,9 +1,13 @@
 package com.chx.pratice;
 
 import java.util.Arrays;
-import java.util.function.IntConsumer;
+
 
 public class Sulotion {
+
+    /**
+     * 二分法查找元素是否存在
+     */
     public boolean binarySearch(int[] nums, int start, int end, int target) {
         boolean isExists = false;
 
@@ -25,6 +29,9 @@ public class Sulotion {
         return isExists;
     }
 
+    /**
+     * leetcode 第1题
+     */
     public int[] twoSum(int[] nums, int target) {
         int[] tmpNums = Arrays.copyOf(nums, nums.length);
 
@@ -64,17 +71,52 @@ public class Sulotion {
         return indexArray;
     }
 
-    public static void main(String[] args) {
-        Sulotion ss = new Sulotion();
-        int[] array = {-1,-2,-3,-4,-5};
 
-        int[] res  = ss.twoSum(array, -8);
-        Arrays.stream(res).forEach(new IntConsumer() {
-            @Override
-            public void accept(int value) {
-                System.out.println(value);
+    /**
+     * leetcode 第21题
+     */
+
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode head = new ListNode();
+        ListNode last = head;
+        ListNode tmp1 = list1;
+        ListNode tmp2 = list2;
+        boolean flag = true;
+        while (flag) {
+            if (tmp1 == null) {
+                last.next = tmp2;
+                flag = false;
+            } else if (tmp2 == null) {
+                last.next = tmp1;
+                flag = false;
+            } else {
+                if (tmp1.val <= tmp2.val) {
+                    last.next = new ListNode(tmp1.val);
+                    last = last.next;
+                    tmp1 = tmp1.next;
+                } else {
+                    last.next = new ListNode(tmp2.val);
+                    last = last.next;
+                    tmp2 = tmp2.next;
+                }
             }
-        });
+        }
 
+        return head.next;
+    }
+
+    public static void main(String[] args) {
+        ListNode list1 = new ListNode(10);
+        ListNode list2 = new ListNode(1);
+
+
+        Sulotion ss = new Sulotion();
+        ListNode res = ss.mergeTwoLists(list1, list2);
+
+        while (res != null) {
+            System.out.println(res.val);
+            res = res.next;
+        }
     }
 }
+
