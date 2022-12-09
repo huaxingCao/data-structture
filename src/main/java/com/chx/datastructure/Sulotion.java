@@ -1,6 +1,8 @@
 package com.chx.pratice;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 
 public class Sulotion {
@@ -105,18 +107,40 @@ public class Sulotion {
         return head.next;
     }
 
-    public static void main(String[] args) {
-        ListNode list1 = new ListNode(10);
-        ListNode list2 = new ListNode(1);
-
-
-        Sulotion ss = new Sulotion();
-        ListNode res = ss.mergeTwoLists(list1, list2);
-
-        while (res != null) {
-            System.out.println(res.val);
-            res = res.next;
+    /**
+     * leetcode 第206题
+     */
+    public ListNode reverseList(ListNode head) {
+        // 返回新的链表
+        ListNode newHead = null;
+        if (head != null) {
+            ListNode tmp = head;
+            while (tmp != null) {
+                newHead = new ListNode(tmp.val, newHead);
+                tmp = tmp.next;
+            }
         }
+
+        return newHead;
+        // 修改原来链表
+        /*
+        if (head != null && head.next != null) {
+            ListNode newHead = head;
+            ListNode nextNode = head.next;
+            ListNode tmpNode;
+            while (nextNode != null) {
+                tmpNode = nextNode.next;
+                nextNode.next = newHead;
+                newHead = nextNode;
+                nextNode = tmpNode;
+            }
+            head.next = null;
+            head = newHead;
+        }
+
+        return head;
+        */
     }
 }
+
 
